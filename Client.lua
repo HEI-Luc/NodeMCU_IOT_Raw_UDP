@@ -1,33 +1,69 @@
 
- LED_PIN1 = 4  
- gpio.mode(LED_PIN1, gpio.OUTPUT)  
- x=1  
+ LED_PIN0 = 0  
+ gpio.mode(LED_PIN0, gpio.OUTPUT)  
+ previousConnexion=0
+ previousColor=0
+ Color=168
  
- 
- tmr.alarm(2, 1000, 1, function()  
- 
-   conn = net.createConnection(net.UDP, 0)  
-   conn:connect(8888,"192.168.4.1")  
-   conn:send(x)  
-   conn:close()  
-   conn = nil  
-   x=x+1  
-   print (x)  
-   if x>1000 then x=1 end  
+ delaySend=10
+	 
+	 function SendUdp()  
+		print("SendUDP")
+		--if(previousColor~=Color)then
+		    
+			Color=tmr.now()/1000000
+		    conn:send(Color)  
+		    
+			print("Color sent with value:"..Color)
+	
+			previousColor=Color
+			
+	--	else
+	--		print("SendUDP: Rien a envoyer"..tmr.now()/1000000)
+	--	end
+	 end
    
-   p=tonumber(wifi.sta.status())  
-   print (p)  
-    if p == 5  
-		then  
-		gpio.write(LED_PIN1, gpio.LOW)  
-		print ("LED OFF")  
+   
+   
+   
+   function CheckConnexion()
+		print("CheckConnexion")
+	   p=tonumber(wifi.sta.status())
+	   print ("Wifi status :"..p)  
+	   if p == 5 then  
+			
+			if(previousConnexion~=5)then
+				
+				print ("La connection est etablie "..wifi.sta.getip())  
+				gpio.write(LED_PIN0, gpio.LOW)  
+				print ("LED OFF")
+				
+				previousConnexion=5
+				conn = net.createConnection(net.UDP, 0)
+				print(conn)
+				conn:connect(8888,"192.168.4.1")  
+				
+				--conn:close()  
+				--conn = nil 
+			
+			end
+			SendUdp()
+			print("Retour1")
+			tmr.alarm(3, delaySend, tmr.ALARM_SINGLE, CheckConnexion)--tmr,temps,mode,fct
+			print("Call timer: prochain appel dans: "..delaySend)
 		else  
-		gpio.write(LED_PIN1, gpio.HIGH)  
-		print ("LED ON") 
-	else
-		wifi.setmode(wifi.STATION)  
-		wifi.sta.config("EvolutLight","")  
-		wifi.sta.connect()  
-		print (wifi.sta.getip())  
-    end  
- end)  
+			print("Connection OFF")
+			previousConnexion=p
+			gpio.write(LED_PIN0, gpio.HIGH)  
+			print ("LED ON") 
+			
+			wifi.setmode(wifi.STATION)  
+			wifi.sta.config("EvolutLight","")  
+			wifi.sta.connect()  
+			tmr.alarm(3, 5000, tmr.ALARM_SINGLE, CheckConnexion)--tmr,temps,mode,fct
+		end  
+		print("Fin du check")
+	end
+
+print("Premier Appel")
+CheckConnexion() -- Premier appel de la fct
