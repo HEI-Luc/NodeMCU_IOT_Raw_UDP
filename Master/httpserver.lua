@@ -30,6 +30,7 @@ return function (port)
             local bufferedConnection = BufferedConnectionClass:new(connection)
             local status, err = coroutine.resume(connectionThread, fileServeFunction, bufferedConnection, req, args)
             if not status then
+               print("Heapsize : ",node.heap())
                print("Error: ", err)
             end
          end
@@ -46,45 +47,82 @@ return function (port)
                fileServeFunction = dofile("httpserver-error.lc")
             else
             
-               -- if uri.file=="http/favicon.ico" then
-               --      print(uri.file.." remplasse par la version gif")
-               --    uri.file="http/favicon.gif"
-               -- end
-                  
-               local fileExists = file.open(uri.file, "r")
-               file.close()
-               
-               if not fileExists then
-                  -- gzip check
-                  print(uri.file.."non trouve")
-                  
-                  fileExists = file.open(uri.file .. ".gz", "r")
-                  file.close()
+   --            if uri.file=="help" then
+   --                print(uri.file.." appel equivoque")
+   --            else
 
-                  if fileExists then
-                     --print("gzip variant exists, serving that one")
-                     uri.file = uri.file .. ".gz"
-                     uri.isGzipped = true
-                  end
-               end
+                     print(uri.file.." appel equivoque")
+                     request=uri.file
+                     
+                   startString = string.find(request, "/")
+                   finString   = string.find(request, "=")
+                    
+                    if(startString~=nil and finString~=nil)then
 
-               if not fileExists then
-                  uri.args = {code = 404, errorString = "Not Found"}
-                  fileServeFunction = dofile("httpserver-error.lc")
-               elseif uri.isScript then
-                  fileServeFunction = dofile(uri.file)
-               else
-                  if allowStatic[method] then
-                     uri.args = {file = uri.file, ext = uri.ext, isGzipped = uri.isGzipped}
-                     fileServeFunction = dofile("httpserver-static.lc")
-                  else
-                     uri.args = {code = 405, errorString = "Method not supported"}
-                     fileServeFunction = dofile("httpserver-error.lc")
-                  end
-               end
-            end
-            startServing(fileServeFunction, connection, req, uri.args)
-         end
+                    startString=startString+1
+                    finString=finString-1
+
+                    print(startString)
+                    print(finString)
+                       --param = string.sub(request,startString,finString)
+                        
+                       --print(param)
+                        
+                    --    startString=finString+2;
+                   --    finString = string.find(uri.file, ",")-1
+                        
+                  --      value = string.sub(uri.file,startString,finString)
+                        
+                  --      print(value)
+                        
+                  --      if(param=="div")then
+                  --          div=value
+                  ---      elseif(param=="bright")then
+                   --         WHITE_PWR=value
+                  --      elseif(param=="led")then
+                  --          NB_LED = value  
+                  --      end
+
+                  --      CheckStation()
+                       
+                   else
+                      
+                       local fileExists = file.open(uri.file, "r")
+                       file.close()
+                       
+                       if not fileExists then
+                          -- gzip check
+                          print(uri.file.." non trouve, heap ",node.heap())
+                          
+                          fileExists = file.open(uri.file .. ".gz", "r")
+                          file.close()
+        
+                          if fileExists then
+                             --print("gzip variant exists, serving that one")
+                             uri.file = uri.file .. ".gz"
+                             uri.isGzipped = true
+                          end
+                       end
+        
+                       if not fileExists then
+                          uri.args = {code = 404, errorString = "Not Found"}
+                          fileServeFunction = dofile("httpserver-error.lc")
+                       elseif uri.isScript then
+                          fileServeFunction = dofile(uri.file)
+                       else
+                          if allowStatic[method] then
+                             uri.args = {file = uri.file, ext = uri.ext, isGzipped = uri.isGzipped}
+                             fileServeFunction = dofile("httpserver-static.lc")
+                          else
+                             uri.args = {code = 405, errorString = "Method not supported"}
+                             fileServeFunction = dofile("httpserver-error.lc")
+                          end
+                       end
+                        startServing(fileServeFunction, connection, req, uri.args)
+                    end--if pilotage
+        --        end-- if help
+            end--if longueur
+         end--end fct
 
          local function onReceive(connection, payload)
             collectgarbage()

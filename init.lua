@@ -1,6 +1,6 @@
 --for n,s in pairs(file.list()) do file.remove(n) end
 
-	function CompileFile()
+	local function CompileFile()
 		if file.open(exefile..".lua") then
 			file.close()
 			
@@ -9,10 +9,10 @@
 			  file.remove(exefile..".lc")
 			end
 		
-			print("Compile File:"..f)
-			node.compile(f)
-			print("Remove File:"..f)
-			file.remove(f)
+			print("Compile File:"..exefile)
+			node.compile(exefile..".lua")
+			print("Remove File:"..exefile..".lua")
+			file.remove(exefile..".lua")
 		  --dofile(exefile..".lc")
 		end
 	end
@@ -28,7 +28,11 @@ exefile= "ChipManager"
 CompileFile();
 exefile= "Master"
 CompileFile();
+exefile= "WifiManager"
+CompileFile();
 exefile= "ConfigWifi"
+CompileFile();
+exefile= "httpserver"
 CompileFile();
 
 
@@ -49,6 +53,13 @@ CompileFile();
 		else
 			print(exefile..".lc not exist")
 		end
+       exefile= "WifiManager"
+       if file.open(exefile..".lc") then
+            --print(exefile..".lc non voulu")
+            dofile(exefile..".lc")
+        else
+            print(exefile..".lc not exist")
+        end
 		exefile= "ConfigWifi"
 		if file.open(exefile..".lc") then
 			--print(exefile..".lc non voulu")

@@ -34,15 +34,16 @@ function InitMaster()
     wifiConfig.accessPointConfig.ssid = "EvolutLight"           -- Name of the SSID you want to create
     --wifiConfig.accessPointConfig.pwd = ""                   -- WiFi password - at least 8 characters
     
-    wifiConfig.accessPointIpConfig = {}
-    wifiConfig.accessPointIpConfig.ip = "192.168.110.33"
-    wifiConfig.accessPointIpConfig.netmask = "255.255.255.0"
-    wifiConfig.accessPointIpConfig.gateway = "192.168.110.1"
+    --wifiConfig.accessPointIpConfig = {}
+   -- wifiConfig.accessPointIpConfig.ip = "192.168.110.33"
+   -- wifiConfig.accessPointIpConfig.netmask = "255.255.255.0"
+   -- wifiConfig.accessPointIpConfig.gateway = "192.168.110.1"
     
     wifiConfig.stationPointConfig = {}
     wifiConfig.stationPointConfig.ssid = SSID               -- Name of the WiFi network you want to join
     wifiConfig.stationPointConfig.pwd =  PWD                -- Password for the WiFi network
-    
+    SSID=nil
+    PWD=nil
     -- Tell the chip to connect to the access point
     
     wifi.setmode(wifiConfig.mode)
@@ -52,6 +53,7 @@ function InitMaster()
         print('AP MAC: ',wifi.ap.getmac())
         wifi.ap.config(wifiConfig.accessPointConfig)
         --wifi.ap.setip(wifiConfig.accessPointIpConfig)
+        print ("Le point d'acces qui emet est "..wifiConfig.accessPointConfig.ssid)
     end
     if (wifiConfig.mode == wifi.STATION) or (wifiConfig.mode == wifi.STATIONAP) then
         print('Client MAC: ',wifi.sta.getmac())

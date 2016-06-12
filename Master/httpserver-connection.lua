@@ -25,7 +25,7 @@ function BufferedConnection:new(connection)
    end
 
    function newInstance:send(payload)
-      local flushthreshold = 1400
+      local flushthreshold = 200
 
       local newsize = self.size + payload:len()
       while newsize > flushthreshold do
