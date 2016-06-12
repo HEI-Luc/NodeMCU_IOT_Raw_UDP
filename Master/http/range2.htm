@@ -1,0 +1,150 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><script language="javascript"> 
+
+
+function loadXML(type,value) 
+	{ 
+		var xmlhttp; 
+		if (window.XMLHttpRequest)   
+		{   
+			xmlhttp=new XMLHttpRequest();   
+			//xmlhttp="192.168.1.1";
+		} 
+		else   
+		{   
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");   
+		} 
+		xmlhttp.open("GET",type+"="+ value+",",true); xmlhttp.send(); 
+	} 
+</script> 
+
+<style>
+input[type=range].slider {
+  -webkit-appearance: none;
+  width: 80%;
+  margin: 4vh 10%;
+}
+input[type=range].slider:focus {
+  outline: none;
+}
+input[type=range].slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 10vh;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #68afff;
+  border-radius: 50px;
+  border: 0px solid #000100;
+}
+input[type=range].slider::-webkit-slider-thumb {
+  box-shadow: 0.8px 0.8px 1.9px rgba(0, 0, 62, 0.67), 0px 0px 0.8px rgba(0, 0, 88, 0.67);
+  border: 1.9px solid rgba(0, 30, 0, 0.57);
+  height:  10vh;
+  width:  10vh;
+  border-radius:  10vh;
+  background: #007bff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: 0px;
+}
+input[type=range].slider:focus::-webkit-slider-runnable-track {
+  background: #82bdff;
+}
+input[type=range].slider::-moz-range-track {
+  width: 100%;
+  height: 10vh;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #68afff;
+  border-radius: 5vh;
+  border: 0px solid #000100;
+}
+input[type=range].slider::-moz-range-thumb {
+  box-shadow: 0.8px 0.8px 1.9px rgba(0, 0, 62, 0.67), 0px 0px 0.8px rgba(0, 0, 88, 0.67);
+  border: 1.9px solid rgba(0, 30, 0, 0.57);
+  height:  10vh;
+  width:  10vh;
+  border-radius:  10vh;
+  background: #007bff;
+  cursor: pointer;
+}
+input[type=range].slider::-ms-track {
+  width: 100%;
+  height: 10vh;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range].slider::-ms-fill-lower {
+  background: #4ea1ff;
+  border: 0px solid #000100;
+  border-radius:  5vh;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range].slider::-ms-fill-upper {
+  background: #68afff;
+  border: 0px solid #000100;
+  border-radius:  10vh;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range].slider::-ms-thumb {
+  box-shadow: 0.8px 0.8px 1.9px rgba(0, 0, 62, 0.67), 0px 0px 0.8px rgba(0, 0, 88, 0.67);
+  border: 1.9px solid rgba(0, 30, 0, 0.57);
+  width: 10vh;
+  border-radius: 10vh;
+  background: #007bff;
+  cursor: pointer;
+  height: 10vh;
+}
+input[type=range].slider:focus::-ms-fill-lower {
+  background: #68afff;
+}
+input[type=range].slider:focus::-ms-fill-upper {
+  background: #82bdff;
+}
+body{
+
+	font-size: 1vh;
+	background: #bbddff;
+}
+
+
+</style>
+
+</head><body>
+<br>1
+<br>2
+<h1>This is heading 1</h1>
+ <p>
+ <input name="html5shim-0" id="html5shim-0" min="1" max="144" step="1" title="Étendue : 1 à 255 avec les augmentations de 10" onclick="loadXML('led',value)" value="25" type="range" class="slider" width="104" height="142" >
+
+
+<h2>This is heading 2</h2>
+ <p>
+<input type="range" name="points" id="points" onclick="loadXML('couleur',value)" value="50" min="0" max="100" class="slider" >
+
+ 
+<h3>This is heading 3</h3>
+  <p>
+<input type="range" name="points" id="points" onclick="loadXML('Valeur',value)" value="50" min="0" max="100" class="slider" >
+  
+  
+<h4>This is heading 4</h4>
+  <p>
+<input type="range" name="points" id="points" onclick="loadXML('mode',value)" value="50" min="0" max="100" class="slider" >
+
+	
+<h5>This is heading 5</h5>
+  <p>
+<input type="range" name="points" id="points" onclick="loadXML('temperature',value)" value="50" min="0" max="100" class="slider" >
+<h6>This is heading 6</h6>
+  <p>
+<input type="range" name="points" id="points" onclick="loadXML('bright',value)" value="50" min="0" max="100" class="slider" >
+
+
+</body>
+
+</html>
+
+

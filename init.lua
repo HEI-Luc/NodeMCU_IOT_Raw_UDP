@@ -26,15 +26,15 @@ print("NodeMCU Started")
 
 exefile= "ChipManager"
 CompileFile();
-exefile= "Client"
+exefile= "Master"
 CompileFile();
-exefile= "Server"
+exefile= "ConfigWifi"
 CompileFile();
 
 
 	gpio.mode(1, gpio.INPUT, gpio.PULLUP)
 	if gpio.read(1) == 1 then
-		exefile= "Client"
+		exefile= "ChipManager"
 		if file.open(exefile..".lc") then
 			--print(exefile..".lc non voulu")
 			dofile(exefile..".lc")
@@ -42,7 +42,14 @@ CompileFile();
 			print(exefile..".lc not exist")
 		end
 		
-		exefile= "Server"
+		exefile= "Master"
+		if file.open(exefile..".lc") then
+			--print(exefile..".lc non voulu")
+			dofile(exefile..".lc")
+		else
+			print(exefile..".lc not exist")
+		end
+		exefile= "ConfigWifi"
 		if file.open(exefile..".lc") then
 			--print(exefile..".lc non voulu")
 			dofile(exefile..".lc")

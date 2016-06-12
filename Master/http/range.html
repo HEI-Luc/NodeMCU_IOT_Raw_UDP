@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252"><script language="javascript"> 
+	function loadXML(type,value) 
+	{ 
+		var xmlhttp; 
+		if (window.XMLHttpRequest)   
+		{   
+			xmlhttp=new XMLHttpRequest();   
+			//xmlhttp="192.168.1.1";
+		} 
+		else   
+		{   
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");   
+		} 
+		xmlhttp.open("GET",'http://192.168.100.5/'+type+"="+ value+",",true); xmlhttp.send(); 
+	} 
+	</script> 
+
+	</head>
+	<body>
+		<p> 
+		Nb led<br>
+		1
+		<input name="html5shim-0" id="html5shim-0" min="1" max="144" step="1" title="Étendue : 1 à 255 avec les augmentations de 10" onclick="loadXML('led',value)" value="25" type="range">144
+
+		</p><p>  
+		Attenuation couleur<br>
+		1
+		<input name="html5shim-1" id="html5shim-1" min="1" max="255" step="1" title="Étendue : 1 à 255 avec les augmentations de 10" onclick="loadXML('div',value)" value="32" type="range">255
+
+		<!--
+		</p><p> 
+		Nb led<br>
+		<input name="html5shim-2" id="html5shim-2" min="0" max="100" step="1" title="Étendue : 0 à 100 avec les augmentations de 10" onclick="loadXMLgpio(value)" value="100" type="range">
+		-->
+		<!--
+		</p><p>
+		Temperature de couleur<br>
+		<input name="html5shim-3" id="html5shim-3" min="0" max="100" step="1" title="Étendue : 0 à 100 avec les augmentations de 10" onclick="loadXMLtemp(value)" value="100" type="range">
+		-->
+
+
+		</p><p>
+		Intensité du blanc<br>
+		0
+		<input name="html5shim-4" id="html5shim-4" min="0" max="255" step="1" title="Étendue : 0 à 100 avec les augmentations de 10" onclick="loadXML('bright',value)" value="0" type="range">255
+
+		<!--
+		</p><p>
+		<input name="html5shim-5" id="html5shim-5" min="0" max="1000" step="1" title="Étendue : 0 à 100 avec les augmentations de 10" onclick="loadXMLbright(value)" value="1000" type="range">
+		</p><p>
+		<input value="#fad345" onchange="loadXMLcolor((int)value)" name="textcolor" type="color">
+		-->
+		</p>
+	</body>
+</html>

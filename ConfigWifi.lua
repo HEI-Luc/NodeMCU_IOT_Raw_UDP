@@ -1,13 +1,15 @@
 	
 	
 	if range ==1 then -- master AP
-		wifi.setmode(wifi.SOFTAP) 
+		--wifi.setmode(wifi.SOFTAP) 
 
-		cfg={}  
-		cfg.ssid="EvolutLight"  
-		wifi.ap.config(cfg)  
+		--cfg={}  
+		--cfg.ssid="EvolutLight"  
+		--wifi.ap.config(cfg)  
 				
-		print ("Le point d'acces qui emet est "..cfg.ssid)  
+		--print ("Le point d'acces qui emet est "..cfg.ssid)
+		InitWifi()
+		InitMaster()
 		CheckStation()
 	elseif range==2 then 
 		wifi.setmode(wifi.STATIONAP )  
