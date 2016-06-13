@@ -25,7 +25,9 @@ function BufferedConnection:new(connection)
    end
 
    function newInstance:send(payload)
-      local flushthreshold = 200
+	
+		print("Connection Heap: ", node.heap())
+      local flushthreshold = 300 --1400
 
       local newsize = self.size + payload:len()
       while newsize > flushthreshold do

@@ -13,7 +13,7 @@ return function (connection, code, extension, isGzipped)
 
    local function getMimeType(ext)
       -- A few MIME types. Keep list short. If you need something that is missing, let's add it.
-      local mt = {css = "text/css", gif = "image/gif", html = "text/html", ico = "image/x-icon", jpeg = "image/jpeg", jpg = "image/jpeg", js = "application/javascript", json = "application/json", png = "image/png", xml = "text/xml"}
+      local mt = {css = "text/css", gif = "image/gif", html = "text/html",htm = "text/html", ico = "image/x-icon", jpg = "image/jpeg",   png = "image/png"} --, xml = "text/xml" jpeg = "image/jpeg", js = "application/javascript",json = "application/json",
       if mt[ext] then return mt[ext] else return "text/plain" end
    end
 

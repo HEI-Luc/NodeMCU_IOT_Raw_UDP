@@ -9,6 +9,7 @@ local function validateMethod(method)
 end
 
 local function uriToFilename(uri)
+	print("uriToFilename",node.heap())
    return "http/" .. string.sub(uri, 2, -1)
 end
 
@@ -20,7 +21,8 @@ local function uri_decode(input)
   return input:gsub("%+", " "):gsub("%%(%x%x)", hex_to_char)
 end
 
-local function parseArgs(args)
+local function parseArgs(args) -- parse quoi ?
+	print("parseArgs",node.heap())
    local r = {}; i=1
    if args == nil or args == "" then return r end
    for arg in string.gmatch(args, "([^&]+)") do
@@ -31,7 +33,8 @@ local function parseArgs(args)
    return r
 end
 
-local function parseFormData(body)
+local function parseFormData(body) 
+	print("parseFormData",node.heap())
    local data = {}
    --print("Parsing Form Data")
    for kv in body.gmatch(body, "%s*&?([^=]+=[^&]+)") do
@@ -43,6 +46,7 @@ local function parseFormData(body)
 end
 
 local function getRequestData(payload)
+	print("getRequestData",node.heap())
    local requestData
    return function ()
       --print("Getting Request Data")
@@ -72,6 +76,8 @@ local function getRequestData(payload)
 end
 
 local function parseUri(uri)
+	print("parseUri",node.heap())
+	
    local r = {}
    local filename
    local ext
@@ -109,6 +115,7 @@ return function (request)
    --print("Request: \n", request)
    local e = request:find("\r\n", 1, true)
    if not e then return nil end
+   
    local line = request:sub(1, e - 1)
    local r = {}
    _, i, r.method, r.request = line:find("^([A-Z]+) (.-) HTTP/[1-9]+.[0-9]+$")

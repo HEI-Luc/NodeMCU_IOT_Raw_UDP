@@ -22,7 +22,7 @@ function loadXML(type,value)
 input[type=range].slider {
   -webkit-appearance: none;
   width: 80%;
-  margin: 4vh 10%;
+  margin: 000000vh 10%;
 }
 input[type=range].slider:focus {
   outline: none;
@@ -105,45 +105,34 @@ input[type=range].slider:focus::-ms-fill-upper {
 }
 body{
 
-	font-size: 1vh;
+	font-size: 5vh;
 	background: #bbddff;
+	text-align: center;
 }
 
 
 </style>
 
-</head><body>
-<br>1
-<br>2
-<h1>This is heading 1</h1>
- <p>
- <input name="html5shim-0" id="html5shim-0" min="1" max="144" step="1" title="Étendue : 1 à 255 avec les augmentations de 10" onclick="loadXML('led',value)" value="25" type="range" class="slider" width="104" height="142" >
+	</head>
+	<body>
+		<h4>1 Nb Led</h4>
+		 <input name="html5shim-0" id="html5shim-0" min="1" max="144" step="1" title="Étendue : 1 à 255 avec les augmentations de 10" onchange="loadXML('led',value)" value="25" type="range" class="slider" width="104" height="142" >
 
+		<h4>2 Couleur (Hue)</h4>
+		<input type="range" name="points" id="points" onchange="loadXML('couleur',value)" value="50" min="0" max="100" class="slider" >
 
-<h2>This is heading 2</h2>
- <p>
-<input type="range" name="points" id="points" onclick="loadXML('couleur',value)" value="50" min="0" max="100" class="slider" >
+		<h4>3 Valeur (intensité rgb)</h4>
+		<input type="range" name="points" id="points" onchange="loadXML('Valeur',value)" value="50" min="0" max="100" class="slider" >
+		  
+		<h4>4 Mode</h4>
+		<input type="range" name="points" id="points" onchange="loadXML('mode',value)" value="50" min="0" max="100" class="slider" >
 
- 
-<h3>This is heading 3</h3>
-  <p>
-<input type="range" name="points" id="points" onclick="loadXML('Valeur',value)" value="50" min="0" max="100" class="slider" >
-  
-  
-<h4>This is heading 4</h4>
-  <p>
-<input type="range" name="points" id="points" onchange="loadXML('mode',value)" value="50" min="0" max="100" class="slider" >
-
-	
-<h5>This is heading 5</h5>
-  <p>
-<input type="range" name="points" id="points" onchange="loadXML('temperature',value)" value="50" min="0" max="100" class="slider" >
-<h6>This is heading 6</h6>
-  <p>
-<input type="range" name="points" id="points" onchange="loadXML('bright',value)" value="50" min="0" max="100" class="slider" >
-
-
-</body>
+		<h4>5 Temperature</h4>
+		<input type="range" name="points" id="points" onchange="loadXML('temperature',value)" value="50" min="0" max="100" class="slider" >
+		
+		<h4>6 Bright</h4>
+		<input type="range" name="points" id="points" onchange="loadXML('bright',value)" value="50" min="0" max="100" class="slider" >
+	</body>
 
 </html>
 

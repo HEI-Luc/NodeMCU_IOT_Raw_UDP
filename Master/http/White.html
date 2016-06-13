@@ -1,0 +1,47 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><script language="javascript"> 
+
+
+function loadXML(type,value) 
+	{ 
+		var xmlhttp; 
+		if (window.XMLHttpRequest)   
+		{   
+			xmlhttp=new XMLHttpRequest();   
+			//xmlhttp="192.168.1.1";
+		} 
+		else   
+		{   
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");   
+		} 
+		xmlhttp.open("GET",type+"="+ value+",",true); xmlhttp.send(); 
+	} 
+</script> 
+
+<style>
+
+</style>
+	
+     <link rel="stylesheet" type="text/css" href="Style.css">
+   
+	</head>
+	<body>
+	
+		<div>
+			<input type="button" class="myButton1" value="Color" href="/Color.html"/>
+			<input type="button" class="myButton2" value="Selector" href="/Selector.html"/>
+			<input type="button" class="myButton3" value="White" href="/White.html"/>
+		</div>
+		<br>
+		
+		<h4>1 White (intensité tout)</h4>
+		<input type="range" name="points" id="points" onchange="loadXML('Valeur',value)" value="50" min="0" max="100" class="slider" >
+		
+		<h4>5 Temperature</h4>
+		<input type="range" name="points" id="points" onchange="loadXML('temperature',value)" value="50" min="0" max="100" class="slider" >
+		
+	</body>
+
+</html>
+
+

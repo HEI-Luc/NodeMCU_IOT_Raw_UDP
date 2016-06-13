@@ -22,7 +22,7 @@ function loadXML(type,value)
 input[type=range].slider {
   -webkit-appearance: none;
   width: 80%;
-  margin: 4vh 10%;
+  margin: 000000vh 10%;
 }
 input[type=range].slider:focus {
   outline: none;
@@ -105,45 +105,72 @@ input[type=range].slider:focus::-ms-fill-upper {
 }
 body{
 
-	font-size: 1vh;
+	font-size: 5vh;
 	background: #bbddff;
+	text-align: center;
+}
+.bouton{
+	float: left; 
 }
 
+.myButton1, .myButton2, .myButton3 {
+	align: left;
+	width: 34vw;
+	height: 10vh;
+	background-color:#2c362f;
+	-moz-border-radius:1vh;
+	-webkit-border-radius:1vh;
+	border-radius:1vh;
+	border:1px solid #808080;
+	cursor:pointer;
+	color:#ffffff;
+	padding:0px 0px;
+	position:absolute;
+	top:0px;
+	left:20px;
+	margin: -1vh 0vw;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+	
+}
+.myButton:hover {
+	background-color:#000000;
+}
+
+.myButton1{
+	left:0vw;
+}
+.myButton2{
+	left:33.333vw;
+}
+.myButton3{
+	left:66.666vw;
+}
+.myButton:active {
+	
+	
+}
 
 </style>
-
-</head><body>
-<br>1
-<br>2
-<h1>This is heading 1</h1>
- <p>
- <input name="html5shim-0" id="html5shim-0" min="1" max="144" step="1" title="Étendue : 1 à 255 avec les augmentations de 10" onclick="loadXML('led',value)" value="25" type="range" class="slider" width="104" height="142" >
-
-
-<h2>This is heading 2</h2>
- <p>
-<input type="range" name="points" id="points" onclick="loadXML('couleur',value)" value="50" min="0" max="100" class="slider" >
-
- 
-<h3>This is heading 3</h3>
-  <p>
-<input type="range" name="points" id="points" onclick="loadXML('Valeur',value)" value="50" min="0" max="100" class="slider" >
-  
-  
-<h4>This is heading 4</h4>
-  <p>
-<input type="range" name="points" id="points" onclick="loadXML('mode',value)" value="50" min="0" max="100" class="slider" >
-
+	</head>
+	<body>
 	
-<h5>This is heading 5</h5>
-  <p>
-<input type="range" name="points" id="points" onclick="loadXML('temperature',value)" value="50" min="0" max="100" class="slider" >
-<h6>This is heading 6</h6>
-  <p>
-<input type="range" name="points" id="points" onclick="loadXML('bright',value)" value="50" min="0" max="100" class="slider" >
-
-
-</body>
+		<div>
+			<input type="button" class="myButton1" value="Color" href="/index.html"/>
+			<input type="button" class="myButton2" value="Selector" href="/Selector.html"/>
+			<input type="button" class="myButton3" value="White" href="/White.html"/>
+		</div>
+		<br>
+		<h4>1 Valeur (intensité rgb)</h4>
+		<input type="range" name="points" id="points" onchange="loadXML('Valeur',value)" value="50" min="0" max="100" class="slider" >
+		
+		<h4>2 Couleur (Hue)</h4>
+		<input type="range" name="points" id="points" onchange="loadXML('couleur',value)" value="50" min="0" max="100" class="slider" >
+		
+		<h4>1 White (intensité blanc)</h4>
+		<input type="range" name="points" id="points" onchange="loadXML('Valeur',value)" value="50" min="0" max="100" class="slider" >
+		
+	</body>
 
 </html>
 

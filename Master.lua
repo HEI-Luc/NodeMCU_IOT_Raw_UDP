@@ -99,6 +99,8 @@ function InitMaster()
        'cars.html',
        'garage_door_opener.html',   
        'index.html',  
+       'White.html',  
+       'Style.css',  
        'range.html', 
        'range2.htm', 
        'range2.html',
@@ -118,6 +120,7 @@ function InitMaster()
           collectgarbage()
        end
     end
+
     
     httpfiles=nil
     
