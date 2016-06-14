@@ -21,9 +21,7 @@
 	}
 
 	for k, v in ipairs(allvalues) do
-	
-		print(string.format("k=%s, v=%s",tostring(k),tostring(v)))
-		
+		--print(string.format("k=%s, v=%s",tostring(k),tostring(v)))
 		if v.chip == node.chipid() then
 			print("Node numero "..k.." de rang: "..allvalues[k].range)
 			nodeId=k
