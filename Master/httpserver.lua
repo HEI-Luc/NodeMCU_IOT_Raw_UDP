@@ -67,7 +67,11 @@ return function (port)
 				  end
 			   else
 			  
-					print(uri.file.." appel equivoque")
+					print("appel ",uri.file)
+                    print(node.heap())  
+                    collectgarbage()
+                    print(node.heap())   
+                    
 					request=uri.file
 					 
 					 startString = string.find(request, "/")

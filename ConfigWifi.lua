@@ -10,7 +10,12 @@
     		--print ("Le point d'acces qui emet est "..cfg.ssid)
     		InitWifi()
     		InitMaster()
-    		CheckStation()
+    	    CheckStation()
+
+          StartListenerUdp=nil
+          TryConnectToAP=nil
+          CheckConnToAP=nil
+         
     	elseif range==2 then 
     		wifi.setmode(wifi.STATIONAP )  
     		cfg={}  
@@ -54,6 +59,7 @@
      end
 
     configWifi()
+   
      
 	
 	

@@ -66,81 +66,7 @@ function InitMaster()
     wifiConfig = nil
     collectgarbage()
     
-    -- End WiFi configuration
-    
-    -- Compile server code and remove original .lua files.
-    -- This only happens the first time afer the .lua files are uploaded.
-    
-    local compileAndRemoveIfNeeded = function(f)
-       if file.open(f) then
-          file.close()
-          print('Compiling:', f)
-          node.compile(f)
-          file.remove(f)
-          collectgarbage()
-       end
-    end
-    
-    
-    local httpfiles = {
-       'garage_door_opener.css',
-       'underconstruction.gif',
-       'zipped.html.gz',
-       'cars-ferrari.jpg',
-       'cars-lambo.jpg',
-       'cars-mas.jpg',
-       'cars-porsche.jpg',
-       'args.lua',
-       'file_list.lua',
-       'garage_door_opener.lua',
-       'node_info.lua',
-       'post.lua',
-       'apple-touch-icon.png',
-       'cars.html',
-       'garage_door_opener.html',   
-       'index.html',  
-       'White.html',  
-       'Style.css',  
-       'range.html', 
-       'range2.htm', 
-       'range2.html',
-       'favicon.ico',
-       'favicon.gif',
-    }
-    for i, f in ipairs(httpfiles) do
-         if file.open(f) then
-          file.close()
-          if file.open('http/'..f) then
-             file.close()
-             file.remove('http/'..f)
-          end
-          print('Rename http/', f)
-          file.rename(f,"http/"..f)
-          file.remove(f)
-          collectgarbage()
-       end
-    end
-
-    
-    httpfiles=nil
-    
-    local serverFiles = {
-       'httpserver.lua',
-       'httpserver-b64decode.lua',
-       'httpserver-basicauth.lua',
-       'httpserver-conf.lua',
-       'httpserver-connection.lua',
-       'httpserver-error.lua',
-       'httpserver-header.lua',
-       'httpserver-request.lua',
-       'httpserver-static.lua',
-    }
-    for i, f in ipairs(serverFiles) do compileAndRemoveIfNeeded(f) end
-    
-    compileAndRemoveIfNeeded = nil
-    serverFiles = nil
-    collectgarbage()
-    serverFiles=nil
+  
     
     -- Connect to the WiFi access point.
     -- Once the device is connected, you may start the HTTP server.
@@ -163,6 +89,7 @@ function InitMaster()
               joinCounter = nil
               joinMaxAttempts = nil
               collectgarbage()
+              print(node.heap())               
            end
         end)
     end

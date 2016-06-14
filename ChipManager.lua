@@ -30,3 +30,7 @@
 			range=allvalues[k].range
 		end
 	end
+
+    print("Free Chip Manager")  
+    collectgarbage()
+    print(node.heap())   
