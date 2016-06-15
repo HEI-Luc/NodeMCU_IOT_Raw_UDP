@@ -70,47 +70,10 @@ return function (port)
 						print(node.heap())  
 						collectgarbage()
 						print(node.heap())   
+					
+						uri.args = {code = 404, errorString = "Not Found"}
+						fileServeFunction = dofile("httpserver-error.lc")
 						
-						request=uri.file
-						 
-						 startString = string.find(request, "/")
-						 finString   = string.find(request, "=")
-						
-						if(startString~=nil and finString~=nil)then
-
-							startString=startString+1
-							finString=finString-1
-
-							print(startString)
-							print(finString)
-							param = string.sub(request,startString,finString)
-							
-							print("Param: ",param)
-							
-							startString=finString+2;
-							finString = string.find(uri.file, ",")-1
-							
-							value = string.sub(uri.file,startString,finString)
-							
-							print("Value: ",value)
-							print("Heap: ",node.heap())
-							
-							if(param=="div")then
-								div=value
-							elseif(param=="bright")then
-								WHITE_PWR=value
-							elseif(param=="led")then
-								NB_LED = value  
-							end
-
-							--CheckStation()
-							uri.args = {code = 200, errorString = "Ordre recu"}
-							fileServeFunction = dofile("httpserver-error.lc")
-							  
-						else
-							uri.args = {code = 404, errorString = "Not Found"}
-							fileServeFunction = dofile("httpserver-error.lc")
-						end
 					end --if nom.gzip
 				end --if nom brute
 				
@@ -136,22 +99,14 @@ return function (port)
 				print("onReceive Heap: ",node.heap())
 			if not connectionThread then -- connection nulle => pas d'envoi en cours, on écoute la requete
 				print("Connection prise en compte ",connectionThread)
-				--ServerLibre=false
-			--local conf = dofile("httpserver-conf.lc")
-			--	print("apres conf Heap: ",node.heap())
-			--    local auth
-			--    local user = "Anonymous"
-
-				-- as suggest by anyn99 (https://github.com/marcoskirsch/nodemcu-httpserver/issues/36#issuecomment-167442461)
-				-- Some browsers send the POST data in multiple chunks.
-				-- Collect data packets until the size of HTTP body meets the Content-Length stated in header
+		
 				if payload:find("Content%-Length:") or bBodyMissing then
 				   if fullPayload then fullPayload = fullPayload .. payload else fullPayload = payload end
 				   if (tonumber(string.match(fullPayload, "%d+", fullPayload:find("Content%-Length:")+16)) > #fullPayload:sub(fullPayload:find("\r\n\r\n", 1, true)+4, #fullPayload)) then
 					  bBodyMissing = true
 					  return
 				   else
-					  --print("HTTP packet assembled! size: "..#fullPayload)
+					 
 					  payload = fullPayload
 					  fullPayload, bBodyMissing = nil
 				   end
@@ -163,10 +118,7 @@ return function (port)
 				print("apres request Heap: ",node.heap())
 				print(req.method .. ": " .. req.request)
 				
-		  --      if conf.auth.enabled then
-		  --         auth = dofile("httpserver-basicauth.lc")
-		 --          user = auth.authenticate(payload) -- authenticate returns nil on failed auth
-		  --      end
+		
 
 			   -- if user and req.methodIsValid and (req.method == "GET" or req.method == "POST" or req.method == "PUT") then
 				if req.methodIsValid and (req.method == "GET" or req.method == "POST" or req.method == "PUT") then
@@ -174,9 +126,7 @@ return function (port)
 				else
 				   local args = {}
 				   local fileServeFunction = dofile("httpserver-error.lc")
-			  --     if not user then
-			  --        args = {code = 401, errorString = "Not Authorized", headers = {auth.authErrorHeader()}}
-			  --     else
+			 
 				   if req.methodIsValid then
 					  args = {code = 501, errorString = "Not Implemented"}
 				   else
@@ -211,12 +161,12 @@ return function (port)
 
          local function onDisconnect(connection, payload)
             if connectionThread then
-				print("Demande de deconnection, connection avorte",connectionThread)
+				print("connection avorte",connectionThread)
 				connectionThread = nil
-			else
-				print("Demande de deconnection",connectionThread)
             end
 			collectgarbage()
+            print("Deconnection", node.heap())
+			CheckStation()
          end
 
          connection:on("receive", onReceive)

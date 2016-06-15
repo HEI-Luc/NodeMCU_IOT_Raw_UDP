@@ -5,17 +5,65 @@
  firstCo=0
  previousColor=0
  Color=168
- 
+	
+	
+	local function parseArgs(args) -- parse quoi ?
+		--print("parseArgs",node.heap())
+	   local r = {}; i=1
+	   if args == nil or args == "" then return r end--chaine vide
+		repeat
+			--print(args)
+			pos=args:find("=")
+			if pos then
+				name=args:sub(0,pos-1)
+				--print(name)
+				if name ~= nil then
+					posVal=args:find("&")
+					if posVal then
+						value=args:sub(pos+1,posVal-1)
+						args=args:sub(posVal+1,#args)
+						r[name] = tonumber(value)
+						i = i + 1
+					else
+						value=args:sub(pos+1,#args)
+						r[name] = tonumber(value)
+						i = i + 1
+						name=nil
+					end
+					--print(value)
+				end	
+			end
+		until name == nil
+	   return r
+	end
+
+
 	 local function StartListenerUdp()
 		 s=net.createServer(net.UDP)   
          print(s)
-		 s:on("receive",function(s,c)  
-			print("Recu Color="..c.." Previous:"..previousColor)  
+		 s:on("receive",function(s,msg)  
+			print("Recu Color="..msg.." Previous:"..previousColor)  
 			
-			--gpio.write(LED_PIN0, gpio.LOW)  
-			--gpio.write(LED_PIN0, gpio.HIGH)  
+			questionMarkPos, b, c, d, e, f = msg:find("?")
+		   if questionMarkPos then
+			  tab=parseArgs(msg:sub(questionMarkPos+1, #msg))
+		   end
+			
+			--print("le tableau est")
+			--parseArgs(c)
+			for name, value in pairs(tab) do
+			--	print("Recu: ",name,"=",value)
+				for Gname, Gvalue in pairs(allvalues[nodeId]) do
+				--	--print("Global: ",name,"=",value)
+					if name==Gname then
+						Gvalue=value
+				--		print("Updated")
+					end
+				end
+			end
 			  
-			previousColor=c  
+			previousColor=msg  
+			
 		 end)   
 		 s:listen(8888) 
 	end
@@ -41,8 +89,8 @@
                     else
                         --print("SendUDP")
                         --if(previousColor~=Color)then
-                            Color=tmps
-                            allvalues[k].conn:send(Color)  
+                            
+                            allvalues[k].conn:send("?Hue="..allvalues[k].Hue.."&Color="..allvalues[k].Color.."&White="..allvalues[k].White)  
                             
                             print("Node "..k.." Color sent with value:"..Color)
                     
@@ -67,7 +115,11 @@
         end
         if range > 1 then
 		    tmr.alarm(3, 5000, tmr.ALARM_SINGLE, CheckStation)--tmr,temps,mode,fct
-        end
+        elseif not connectionThread then
+			tmr.alarm(3, 5000, tmr.ALARM_SINGLE, CheckStation)--tmr,temps,mode,fct
+		end
+		
+		
 	end
 	
 

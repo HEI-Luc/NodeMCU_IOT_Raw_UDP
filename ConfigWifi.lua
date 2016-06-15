@@ -15,6 +15,9 @@
           StartListenerUdp=nil
           TryConnectToAP=nil
           CheckConnToAP=nil
+		  parseArgs=nil
+		  uri_decode=nil
+
          
     	elseif range==2 then 
     		wifi.setmode(wifi.STATIONAP )  

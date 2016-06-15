@@ -36,6 +36,7 @@
        'args.lua',
        'file_list.lua',
        'node_info.lua',
+       'Rainbow.lua',
        'post.lua',   
        'index.html',  
        'White.html',  
@@ -45,6 +46,9 @@
        'range2.html',
        'favicon.ico',
        'favicon.gif',
+       'RGB.svg',
+       'RGB.png',
+       'apple-touch-icon.png',
     }
     
     local function RenameHttp(f)       
@@ -94,6 +98,7 @@
 	   'WifiManager',
 	   'ConfigWifi',
 	   'httpserver',
+       'Led',
 	}
 
 	local ToDoFiles = {
@@ -101,6 +106,7 @@
 	   'Master',
 	   'WifiManager',
 	   'ConfigWifi',
+       'Led',
 	}
 
 	for i, f in ipairs(ToCompileFiles) do 

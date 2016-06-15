@@ -14,7 +14,7 @@ function loadXML(type,value)
 		{   
 			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");   
 		} 
-		xmlhttp.open("GET",type+"="+ value+",",true); xmlhttp.send(); 
+		xmlhttp.open("GET","args.lua?"+type+"="+ value,true); xmlhttp.send(); 
 	} 
 </script> 
 
@@ -116,20 +116,19 @@ body{
 .myButton1, .myButton2, .myButton3 {
 	font-size: 5vh;
 	align: left;
-	width: 34vw;
+	width: 33.333vw;
 	height: 10vh;
 	background-color:#2c362f;
-	-moz-border-radius:1vh;
-	-webkit-border-radius:1vh;
-	border-radius:1vh;
+	-moz-border-radius:2vh;
+	-webkit-border-radius:2vh;
+	border-radius:2vh;
 	border:1px solid #808080;
 	cursor:pointer;
 	color:#ffffff;
 	padding:0px 0px;
 	position:absolute;
 	top:0px;
-	left:20px;
-	margin: -1vh 0vw;
+	margin: -2vh 0vw;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #2f6627;
 	
@@ -147,12 +146,29 @@ body{
 .myButton3{
 	left:66.666vw;
 }
+.RGBW{
+	background: url('RGB.png') ;
+	position: absolute;
+   
+    width: 9vh;
+    height: 9vh;
+	
+	border: 0px solid blue;
+    text-align: center;
+    line-height: 58px;
+   /* background: url('../image/utilaj/utilaj.png') ;*/
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+#RGBW1{ top:0.5vh; left:10vw; }
+
 </style>
 	</head>
 	<body>
 		<div>
 			<input type="button" class="myButton1" value="Color" 	onclick="self.location.href='index.html'" 		href="index.html"/>
-			<input type="button" class="myButton2" value="Selector" onclick="self.location.href='Selector.html'" 	href="Selector.html"/>
+			<input type="button" class="myButton2" value="Selector" onclick="self.location.href='Selector.lua'" 	href="Selector.html"/>
 			<input type="button" class="myButton3" value="White" 	onclick="self.location.href='White.html'"  		href="White.html"/>
 		</div>
 		<br>
@@ -160,6 +176,8 @@ body{
 		<input type="range" name="points" id="points" onchange="loadXML('Valeur',value)" value="50" min="0" max="100" class="slider" >
 		<h4>5 Temperature</h4>
 		<input type="range" name="points" id="points" onchange="loadXML('temperature',value)" value="50" min="0" max="100" class="slider" >
+		<!--<a href="index.html"> <div class="RGBW" id="RGBW1" title="RGBW">		</div>	</a>-->
+		<a> <div class="RGBW" id="RGBW1" title="RGBW">		</div>	</a>
 	</body>
 </html>
 
