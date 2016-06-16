@@ -52,7 +52,7 @@ return function (port)
 				 
 				if file.open(uri.file, "r") then
 					file.close()
-					print(uri.file.." Existe ",node.heap())
+					--print(uri.file.." Existe ",node.heap())
 			   
 				else
 				  -- gzip check
@@ -66,11 +66,6 @@ return function (port)
 					
 					else -- ordre lampe
 				  
-						print("appel ",uri.file)
-						print(node.heap())  
-						collectgarbage()
-						print(node.heap())   
-					
 						uri.args = {code = 404, errorString = "Not Found"}
 						fileServeFunction = dofile("httpserver-error.lc")
 						
@@ -78,10 +73,10 @@ return function (port)
 				end --if nom brute
 				
 				if uri.isScript then
-					print("is script")
+					
 					fileServeFunction = dofile(uri.file)
 				else
-					print("is static")
+					print("Page statique")
 					if allowStatic[method] then
 						uri.args = {file = uri.file, ext = uri.ext, isGzipped = uri.isGzipped}
 						fileServeFunction = dofile("httpserver-static.lc")
@@ -115,7 +110,8 @@ return function (port)
 
 				-- parse payload and decide what to serve.
 				local req = dofile("httpserver-request.lc")(payload)
-				print("apres request Heap: ",node.heap())
+				collectgarbage()
+				print("Apres parse request Heap: ",node.heap())
 				print(req.method .. ": " .. req.request)
 				
 		

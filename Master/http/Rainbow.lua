@@ -1,46 +1,50 @@
-function HSV(Hue,div,white)	--Convertisseur HSV
-    print("Hue: ",Hue," div ", div, " white ",white)
-  if Hue < 85 then
-    return string.char(Hue * 3 / div, (255 - Hue * 3) / div, 0,white)
-  elseif Hue < 170 then
-    Hue = Hue - 85
-    return string.char((255 - Hue * 3) / div, 0, Hue * 3 / div,white)
-  else
-    Hue = Hue - 170
-    return string.char(0, Hue * 3 / div, (255 - Hue * 3) / div,white)
-  end
-  Hue=nil
-  div=nil
-  white=nil
-end
 
 return function (connection, req, args)
 
-	if args.PC then
-		Color = tonumber(args.PC)
-	--else
-	--	Color=32
+	if args.Node then
+		if args.R then
+			allvalues[args.Node].R = tonumber(args.R)
+		end
+		if args.G then
+			allvalues[args.Node].G = tonumber(args.G)
+		end
+		if args.B then
+			allvalues[args.Node].B =  tonumber(args.B)
+		end  
+		if args.W then
+			allvalues[args.Node].W =  tonumber(args.W)
+		end  
+	else-- brodcast
+		if args.R then
+			allvalues[1].R = tonumber(args.R)
+			allvalues[2].R = tonumber(args.R)
+			allvalues[3].R = tonumber(args.R)
+			R = tonumber(args.R)
+		end
+		if args.G then
+			allvalues[1].G = tonumber(args.G)
+			allvalues[2].G = tonumber(args.G)
+			allvalues[3].G = tonumber(args.G)
+			G = tonumber(args.G)
+		end
+		if args.B then
+			allvalues[1].B =  tonumber(args.B)
+			allvalues[2].B =  tonumber(args.B)
+			allvalues[3].B =  tonumber(args.B)
+			B =  tonumber(args.B)
+		end  
+		if args.W then
+			allvalues[1].W =  tonumber(args.W)
+			allvalues[2].W =  tonumber(args.W)
+			allvalues[3].W =  tonumber(args.W)
+			W =  tonumber(args.W)
+		end  
 	end
-	if args.HUE then
-		rainbow_index = tonumber(args.HUE)
-	--else
-	--	rainbow_index = 60
-	end
-	if args.PW then
-		WHITE =  tonumber(args.PW)
-	--else
-	--	WHITE = 128
-	end  
 
-    LedColor=HSV(rainbow_index,Color,WHITE)
+    --LedColor=HSV(rainbow_index,Color,WHITE)
+    --LedColor=string.char(G,R,B,W)
     LedRefresh()
     
-	
-	--Color=nil
-	--rainbow_index=nil
-	--WHITE=nil
-    HSV=nil
-
     collectgarbage()
     print("Acquitement ",node.heap())
 	

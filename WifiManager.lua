@@ -90,9 +90,9 @@
                         --print("SendUDP")
                         --if(previousColor~=Color)then
                             
-                            allvalues[k].conn:send("?Hue="..allvalues[k].Hue.."&Color="..allvalues[k].Color.."&White="..allvalues[k].White)  
+                            allvalues[k].conn:send("?W="..allvalues[k].W.."&R="..allvalues[k].R.."&G="..allvalues[k].G.."&B="..allvalues[k].B)  
                             
-                            print("Node "..k.." Color sent with value:"..Color)
+                            print("Node "..k.." Colors sent")
                     
                             previousColor=Color
                         --  else

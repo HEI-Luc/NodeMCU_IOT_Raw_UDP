@@ -9,7 +9,7 @@ local function validateMethod(method)
 end
 
 local function uriToFilename(uri)
-	print("uriToFilename",node.heap())
+	--print("uriToFilename",node.heap())
    return "http/" .. string.sub(uri, 2, -1)
 end
 
@@ -22,7 +22,7 @@ local function uri_decode(input)
 end
 
 local function parseArgs(args) -- parse quoi ?
-	print("parseArgs",node.heap())
+	--print("parseArgs",node.heap())
    local r = {}; i=1
    if args == nil or args == "" then return r end
    for arg in string.gmatch(args, "([^&]+)") do
@@ -46,7 +46,7 @@ local function parseFormData(body)
 end
 
 local function getRequestData(payload)
-	print("getRequestData",node.heap())
+	--print("getRequestData",node.heap())
    local requestData
    return function ()
       --print("Getting Request Data")
@@ -76,7 +76,7 @@ local function getRequestData(payload)
 end
 
 local function parseUri(uri)
-	print("parseUri",node.heap())
+	--print("parseUri",node.heap())
 	
    local r = {}
    local filename

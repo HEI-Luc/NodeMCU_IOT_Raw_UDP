@@ -105,7 +105,7 @@ input[type=range].slider:focus::-ms-fill-upper {
 }
 body{
 
-	font-size: 5vh;
+	font: 5vh Arial, Verdana, Geneva, sans-serif;
 	background: #bbddff;
 	text-align: center;
 }
@@ -146,22 +146,23 @@ body{
 .myButton3{
 	left:66.666vw;
 }
-.RGBW{
+.img{
 	background: url('RGB.png') ;
 	position: absolute;
    
     width: 9vh;
     height: 9vh;
-	
-	border: 0px solid blue;
-    text-align: center;
-    line-height: 58px;
-   /* background: url('../image/utilaj/utilaj.png') ;*/
+
+  
 	background-size: contain;
 	background-repeat: no-repeat;
 }
 
-#RGBW1{ top:0.5vh; left:10vw; }
+#RGBW1{
+	 /* background: url('../image/utilaj/utilaj.png') ;*/
+	top:0.5vh;
+	left:10vw;
+}
 
 </style>
 	</head>
@@ -172,12 +173,12 @@ body{
 			<input type="button" class="myButton3" value="White" 	onclick="self.location.href='White.html'"  		href="White.html"/>
 		</div>
 		<br>
-		<h4>1 White (intensité tout)</h4>
+		<h4>Intensité</h4>
 		<input type="range" name="points" id="points" onchange="loadXML('Valeur',value)" value="50" min="0" max="100" class="slider" >
-		<h4>5 Temperature</h4>
+		<h4>Temperature</h4>
 		<input type="range" name="points" id="points" onchange="loadXML('temperature',value)" value="50" min="0" max="100" class="slider" >
 		<!--<a href="index.html"> <div class="RGBW" id="RGBW1" title="RGBW">		</div>	</a>-->
-		<a> <div class="RGBW" id="RGBW1" title="RGBW">		</div>	</a>
+		<!--<a> <div class="img" id="RGBW1" title="RGBW">		</div>	</a>-->
 	</body>
 </html>
 
