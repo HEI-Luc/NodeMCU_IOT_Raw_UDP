@@ -12,6 +12,7 @@
 
 	allvalues = 
 	{
+		--14055142
 	   {chip = 142898, 		staMAC = "				   ", conn=nil, ip = 0, vu=0,    range = 1, W = 0, R = 0, G = 0,  B = 0},
 	   {chip = 1139462, 	staMAC = "5c:cf:7f:11:63:06", conn=nil, ip = 0, vu=0,    range = 2, W = 0, R = 0, G = 0,  B = 0},
 	   {chip = 1140291, 	staMAC = "5c:cf:7f:11:66:43", conn=nil, ip = 0, vu=0,    range = 3, W = 0, R = 0, G = 0,  B = 0},

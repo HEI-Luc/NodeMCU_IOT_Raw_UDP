@@ -53,17 +53,55 @@
 			--parseArgs(c)
 			for name, value in pairs(tab) do
 			--	print("Recu: ",name,"=",value)
-				for Gname, Gvalue in pairs(allvalues[nodeId]) do
-				--	--print("Global: ",name,"=",value)
-					if name==Gname then
-						Gvalue=value
-				--		print("Updated")
+			
+				if name == "R" then 
+					if allvalues[nodeId].R ~= value then
+						print("Old: ",Gvalue," New: ",value)
+						allvalues[nodeId].R=value
+						updated=1
 					end
+				elseif name == "G" then 
+					if allvalues[nodeId].G ~= value then
+						print("Old: ",Gvalue," New: ",value)
+						allvalues[nodeId].G=value
+						updated=1
+					end
+				elseif name == "B" then 
+					if allvalues[nodeId].B ~= value then
+						print("Old: ",Gvalue," New: ",value)
+						allvalues[nodeId].B=value
+						updated=1
+					end
+				elseif name == "W" then 
+					if allvalues[nodeId].W ~= value then
+						print("Old: ",allvalues[nodeId].W," New: ",value)
+						allvalues[nodeId].W=value
+						updated=1
+					end
+				else
+				
 				end
+				
+	--			for Gname, Gvalue in pairs(allvalues[nodeId]) do
+	--			--	--print("Global: ",name,"=",value)
+	--				if name==Gname then
+	--					if Gvalue ~= value then
+	--						print("Global: ",name,"=",value)
+	--						print("Old: ",Gvalue," New: ",value)
+	--						allvalues[nodeId].R=value
+	--						
+	--						updated=1
+	--					end
+	--				end
+	--			end
 			end
 			  
 			previousColor=msg  
-			
+			if updated then
+				--print("GoRefresh")
+				LedRefresh()
+				updated=nil
+			end
 		 end)   
 		 s:listen(8888) 
 	end

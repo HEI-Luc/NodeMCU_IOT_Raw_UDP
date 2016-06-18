@@ -1,23 +1,3 @@
-function InitWifi()
-    
-    print("InitWifi")
-    
-    if file.open("Config_Wifi.txt", "r") then
-        str = file.readline()
-        file.close()
-        SSID = string.sub(str,1,string.find(str, ":")-1)
-        PWD = string.sub(str,string.find(str, ":")+1,string.find(str, ";")-1) 
-        
-        str = nil
-        
-        print(SSID)
-        print (PWD)
-        
-        
-    else
-        print("Config_Wifi.txt not exist")
-    end
-end
                     
 function InitMaster()
     
@@ -28,7 +8,7 @@ function InitMaster()
     -- wifi.STATION         -- station: join a WiFi network
     -- wifi.SOFTAP          -- access point: create a WiFi network
     -- wifi.wifi.STATIONAP  -- both station and access point
-    wifiConfig.mode = wifi.STATIONAP  -- both station and access point
+    wifiConfig.mode = wifi.SOFTAP  -- both station and access point
     
     wifiConfig.accessPointConfig = {}
     wifiConfig.accessPointConfig.ssid = "EvolutLight"           -- Name of the SSID you want to create
@@ -39,11 +19,11 @@ function InitMaster()
    -- wifiConfig.accessPointIpConfig.netmask = "255.255.255.0"
    -- wifiConfig.accessPointIpConfig.gateway = "192.168.110.1"
     
-    wifiConfig.stationPointConfig = {}
-    wifiConfig.stationPointConfig.ssid = SSID               -- Name of the WiFi network you want to join
-    wifiConfig.stationPointConfig.pwd =  PWD                -- Password for the WiFi network
-    SSID=nil
-    PWD=nil
+    --wifiConfig.stationPointConfig = {}
+    --wifiConfig.stationPointConfig.ssid = SSID               -- Name of the WiFi network you want to join
+    --wifiConfig.stationPointConfig.pwd =  PWD                -- Password for the WiFi network
+    --SSID=nil
+    --PWD=nil
     -- Tell the chip to connect to the access point
     
     wifi.setmode(wifiConfig.mode)
@@ -55,10 +35,10 @@ function InitMaster()
         --wifi.ap.setip(wifiConfig.accessPointIpConfig)
         print ("Le point d'acces qui emet est "..wifiConfig.accessPointConfig.ssid)
     end
-    if (wifiConfig.mode == wifi.STATION) or (wifiConfig.mode == wifi.STATIONAP) then
-        print('Client MAC: ',wifi.sta.getmac())
-        wifi.sta.config(wifiConfig.stationPointConfig.ssid, wifiConfig.stationPointConfig.pwd, 1)
-    end
+ --   if (wifiConfig.mode == wifi.STATION) or (wifiConfig.mode == wifi.STATIONAP) then
+ --       print('Client MAC: ',wifi.sta.getmac())
+ --       wifi.sta.config(wifiConfig.stationPointConfig.ssid, wifiConfig.stationPointConfig.pwd, 1)
+ --   end
     
     print('chip: ',node.chipid())
     print('heap: ',node.heap())

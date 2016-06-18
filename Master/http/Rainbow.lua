@@ -2,6 +2,7 @@
 return function (connection, req, args)
 
 	if args.Node then
+		args.Node=tonumber(args.Node)
 		if args.R then
 			allvalues[args.Node].R = tonumber(args.R)
 		end
