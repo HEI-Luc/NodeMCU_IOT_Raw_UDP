@@ -1,50 +1,72 @@
 
 return function (connection, req, args)
 
+	if args.Off1 then
+		allvalues[1].OFF = 1
+	else
+		allvalues[1].OFF = 0
+	end
+	if args.Off2 then
+		allvalues[2].OFF = 1
+	else
+		allvalues[2].OFF = 0
+	end
 	if args.Node then
 		args.Node=tonumber(args.Node)
 		if args.R then
 			allvalues[args.Node].R = tonumber(args.R)
+			allvalues[args.Node].NewValue =1
 		end
 		if args.G then
 			allvalues[args.Node].G = tonumber(args.G)
+			allvalues[args.Node].NewValue =1
 		end
 		if args.B then
 			allvalues[args.Node].B =  tonumber(args.B)
+			allvalues[args.Node].NewValue =1
 		end  
 		if args.W then
 			allvalues[args.Node].W =  tonumber(args.W)
+			allvalues[args.Node].NewValue =1
 		end  
 	else-- brodcast
 		if args.R then
 			allvalues[1].R = tonumber(args.R)
 			allvalues[2].R = tonumber(args.R)
-			allvalues[3].R = tonumber(args.R)
-			R = tonumber(args.R)
+			
+			allvalues[2].NewValue =1
+			--R = tonumber(args.R)
 		end
 		if args.G then
 			allvalues[1].G = tonumber(args.G)
 			allvalues[2].G = tonumber(args.G)
-			allvalues[3].G = tonumber(args.G)
-			G = tonumber(args.G)
+			
+			allvalues[2].NewValue =1
+			--G = tonumber(args.G)
 		end
 		if args.B then
 			allvalues[1].B =  tonumber(args.B)
 			allvalues[2].B =  tonumber(args.B)
-			allvalues[3].B =  tonumber(args.B)
-			B =  tonumber(args.B)
+			
+			allvalues[2].NewValue =1
+			--B =  tonumber(args.B)
 		end  
 		if args.W then
 			allvalues[1].W =  tonumber(args.W)
 			allvalues[2].W =  tonumber(args.W)
-			allvalues[3].W =  tonumber(args.W)
-			W =  tonumber(args.W)
+			
+			allvalues[2].NewValue =1
+			--W =  tonumber(args.W)
 		end  
 	end
 
     --LedColor=HSV(rainbow_index,Color,WHITE)
     --LedColor=string.char(G,R,B,W)
-    LedRefresh()
+   
+   
+   CheckStation()
+   tmr.alarm(1, 150, tmr.ALARM_SINGLE, LedRefresh)
+   --LedRefresh()
     
     collectgarbage()
     print("Acquitement ",node.heap())

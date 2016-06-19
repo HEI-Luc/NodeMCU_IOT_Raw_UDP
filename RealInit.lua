@@ -48,6 +48,8 @@
        'favicon.gif',
        'RGB.svg',
        'RGB.png',
+       'temperature.png',
+       'chroma.png',
        'apple-touch-icon.png',
     }
     
@@ -73,9 +75,6 @@
     
     local serverFiles = {
        'httpserver',
-       'httpserver-b64decode',
-       'httpserver-basicauth',
-       'httpserver-conf',
        'httpserver-connection',
        'httpserver-error',
        'httpserver-header',

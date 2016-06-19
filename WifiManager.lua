@@ -78,6 +78,12 @@
 						allvalues[nodeId].W=value
 						updated=1
 					end
+				elseif name == "OFF" then 
+					if allvalues[nodeId].OFF ~= value then
+						print("Old: ",allvalues[nodeId].OFF," New: ",value)
+						allvalues[nodeId].OFF=value
+						updated=1
+					end
 				else
 				
 				end
@@ -108,10 +114,10 @@
 	
 	function CheckStation()
         tmps=tmr.now()/1000000
-        tmps=tmps-tmps%1
+        
 		--print("Les stations sont :")
 		for mac,ip in pairs(wifi.ap.getclient()) do
-			print(mac,ip)
+			
 
             for k, v in ipairs(allvalues) do
                 
@@ -123,21 +129,32 @@
                         allvalues[k].conn:connect(8888,ip)  
 
                         print("CONNECTION DU NODE "..k) 
-                        allvalues[k].vu=tmps
+						allvalues[k].NewValue =1
                     else
                         --print("SendUDP")
-                        --if(previousColor~=Color)then
+                        if(allvalues[k].NewValue ==1)then
                             
-                            allvalues[k].conn:send("?W="..allvalues[k].W.."&R="..allvalues[k].R.."&G="..allvalues[k].G.."&B="..allvalues[k].B)  
+							
+                            allvalues[k].conn:send("?W="..allvalues[k].W.."&R="..allvalues[k].R.."&G="..allvalues[k].G.."&B="..allvalues[k].B.."&OFF="..allvalues[k].OFF)  
                             
                             print("Node "..k.." Colors sent")
-                    
+							
+							allvalues[k].NewValue =0
                             previousColor=Color
                         --  else
                         --      print("SendUDP: Rien a envoyer"..tmr.now()/1000000)
-                        --  end
-                        allvalues[k].vu=tmps
+                        end
                     end--if conn
+					allvalues[k].vu=tmps
+				else
+				
+					if not OtherMac then
+						print(mac,ip)
+						OtherMac = mac
+					elseif OtherMac ~= mac then
+						print(mac,ip)
+						OtherMac = mac
+					end			
                 end--if mac
             end-- for allchip
 		end
@@ -154,7 +171,7 @@
         if range > 1 then
 		    tmr.alarm(3, 5000, tmr.ALARM_SINGLE, CheckStation)--tmr,temps,mode,fct
         elseif not connectionThread then
-			tmr.alarm(3, 5000, tmr.ALARM_SINGLE, CheckStation)--tmr,temps,mode,fct
+			tmr.alarm(3, 10000, tmr.ALARM_SINGLE, CheckStation)--tmr,temps,mode,fct
 		end
 		
 		

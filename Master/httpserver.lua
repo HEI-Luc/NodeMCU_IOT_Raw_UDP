@@ -162,7 +162,7 @@ return function (port)
             end
 			collectgarbage()
             print("Deconnection", node.heap())
-			CheckStation()
+			
          end
 
          connection:on("receive", onReceive)
