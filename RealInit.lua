@@ -37,17 +37,9 @@
        'file_list.lua',
        'node_info.lua',
        'Rainbow.lua',
-       'post.lua',   
        'index.html',  
-       'White.html',  
-       'Style.css',  
-       'range.html', 
-       'range2.htm', 
-       'range2.html',
        'favicon.ico',
        'favicon.gif',
-       'RGB.svg',
-       'RGB.png',
        'temperature.png',
        'chroma.png',
        'apple-touch-icon.png',
@@ -119,5 +111,7 @@
 	end
 	ToCompileFiles = nil  
 	DoFile=nil
+	
+	
 
 	configWifi=nil

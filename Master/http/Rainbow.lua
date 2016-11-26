@@ -3,13 +3,17 @@ return function (connection, req, args)
 
 	if args.Off1 then
 		allvalues[1].OFF = 1
+		allvalues[1].NewValue =1
 	else
 		allvalues[1].OFF = 0
+		allvalues[1].NewValue =1
 	end
 	if args.Off2 then
 		allvalues[2].OFF = 1
+		allvalues[2].NewValue =1
 	else
 		allvalues[2].OFF = 0
+		allvalues[2].NewValue =1
 	end
 	if args.Node then
 		args.Node=tonumber(args.Node)

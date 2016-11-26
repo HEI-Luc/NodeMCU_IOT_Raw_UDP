@@ -114,7 +114,7 @@
 	
 	function CheckStation()
         tmps=tmr.now()/1000000
-        
+        print("Check : ", tmps)
 		--print("Les stations sont :")
 		for mac,ip in pairs(wifi.ap.getclient()) do
 			

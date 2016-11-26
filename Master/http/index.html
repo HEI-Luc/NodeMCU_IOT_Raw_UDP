@@ -8,7 +8,7 @@ function toHex(n) {
   while (hex.length < 2) {hex = "0" + hex; }
   return hex;
 }
-
+var rgb=""
 function White(){
 	var Wrange,Hrange, h, p ;
 	
@@ -16,6 +16,7 @@ function White(){
 	Wrange = document.getElementById("Pwhite");
 	
 	h=Hrange.value/100;
+	p=Wrange.value/100;
 	
 	var r, g, b,w;
 	
@@ -28,36 +29,29 @@ function White(){
 	{
 		console.log("step1");
 		r=1;
-		g=2*h;
-		b=0;	
+		g=(95/255)+((77/255)*2*h);
+		b=h;	
 	}
-	else if(h<(2/2))
+	else if(h<=(2/2))
 	{
 		console.log("step2");
 		r=1;
-		g=1;
-		b=2*(h-(1/2));
+		g=(172/255)+((83/255)*(2*(h-0.5)));
+		b=h;	
 	}
 	
-	var P_affichage=(Wrange.value*2.55)/4;
-	var P_led=(Wrange.value*2.55)/8;
+	r=Math.round(p*r*255);
+	g=Math.round(p*g*255);
+	b=Math.round(p*b*255);
+	w=Math.round(p*255);
 	
-	var rA=Math.round(r*p+3*p);
-	var gA=Math.round(g*p+3*p);
-	var bA=Math.round(b*p+3*p);
-	
-	r=Math.round(r*P_led*3+P_led);
-	g=Math.round(g*P_led*3+P_led);
-	b=Math.round(b*P_led*3+P_led);
-	w=Math.round(4*P_led);
-	
-	var rgbHex=toHex(r)+toHex(g)+toHex(b);
+	//var rgbHex=toHex(127+r/2)+toHex(127+g/2)+toHex(127+b/2);
 	var rgb="R="+r+"&G="+g+"&B="+b+"&W="+w;
 	
-	console.log(r+" "+g+" "+b+" "+rgbHex);
+	console.log(r+" "+g+" "+b+" ");
 	//console.log(rgb);
 	
-	document.getElementById("fond").style.backgroundColor = rgbHex;
+	//document.getElementById("fond").style.backgroundColor = rgbHex;
 	return  rgb;
 }
 
@@ -104,10 +98,54 @@ function Color(){
 	//console.log(r+" "+g+" "+b+" "+l+" "+w+" "+diviseur+ " "+rgbHex);
 	//console.log(rgbHSV);
 	
-	document.getElementById("fond").style.backgroundColor = rgbHex;
+	//document.getElementById("fond").style.backgroundColor = rgbHex;
 	return  rgbHSV;
 }
-
+function UnCheck()
+{
+	var Bpreset = document.getElementById("RRouge");
+	if (Bpreset.checked)Bpreset.checked=false;
+	else
+	{
+		Bpreset = document.getElementById("ROrange");
+		if (Bpreset.checked) Bpreset.checked=false;
+		else
+		{
+			Bpreset = document.getElementById("RJaune");
+			if (Bpreset.checked) Bpreset.checked=false;
+			else
+			{
+				Bpreset = document.getElementById("RVert");
+				if (Bpreset.checked) Bpreset.checked=false;
+				else
+				{
+					Bpreset = document.getElementById("RCyan");
+					if (Bpreset.checked) Bpreset.checked=false;
+					else
+					{
+						Bpreset = document.getElementById("RBleu");
+						if (Bpreset.checked) Bpreset.checked=false;
+						else
+						{
+							Bpreset = document.getElementById("RViolet");
+							if (Bpreset.checked) Bpreset.checked=false;
+							else
+							{
+								Bpreset = document.getElementById("RRose");
+								if (Bpreset.checked) Bpreset.checked=false;
+								else
+								{
+									Bpreset = document.getElementById("RBlanc");
+									if (Bpreset.checked) Bpreset.checked=false;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
 
  function loadXML(type) 
 	{ 
@@ -120,10 +158,11 @@ function Color(){
 		{   
 			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");   
 		} 
-		var Crange,Hrange,Wrange;
+		var Crange,Hrange,Wrange,Trange;
 		Crange = document.getElementById("Pcolor");
 		Hrange = document.getElementById("Hue");
 		Wrange = document.getElementById("Pwhite");
+		Trange = document.getElementById("Temperature");
 		
 		
 		if (type == 1) // blanc
@@ -134,6 +173,7 @@ function Color(){
 			W=Math.round(W);
 			
 			rgb=White();
+			UnCheck();
 		}
 		else if (type == 2) // couleur
 		{
@@ -141,6 +181,91 @@ function Color(){
 			W=0
 			
 			rgb=Color();
+			UnCheck();
+		}
+		else if (type == 3) // preset
+		{
+			Crange.value=100;
+			Wrange.value=100;
+			
+			var Bpreset = document.getElementById("RRouge");
+			if (Bpreset.checked)
+			{
+				rgb="R=255&G=0&B=0&W=0";
+				Hrange.value=0;
+			}
+			else
+			{
+				Bpreset = document.getElementById("ROrange");
+				if (Bpreset.checked)
+				{
+					rgb="R=255&G=64&B=0&W=0";
+					Hrange.value=11;
+				}
+				else
+				{
+					Bpreset = document.getElementById("RJaune");
+					if (Bpreset.checked)
+					{
+						rgb="R=255&G=128&B=0&W=0";
+						Hrange.value=22;
+					}
+					else
+					{
+						Bpreset = document.getElementById("RVert");
+						if (Bpreset.checked)
+						{
+							rgb="R=0&G=255&B=0&W=0";
+							Hrange.value=33;
+						}
+						else
+						{
+							Bpreset = document.getElementById("RCyan");
+							if (Bpreset.checked)
+							{
+								rgb="R=0&G=255&B=255&W=0";
+								Hrange.value=55;
+							}
+							else
+							{
+								Bpreset = document.getElementById("RBleu");
+								if (Bpreset.checked)
+								{
+									rgb="R=0&G=0&B=255&W=0";
+									Hrange.value=67;
+								}
+								else
+								{
+									Bpreset = document.getElementById("RViolet");
+									if (Bpreset.checked)
+									{
+										rgb="R=255&G=0&B=255&W=0";
+										Hrange.value=78;
+									}
+									else
+									{
+										Bpreset = document.getElementById("RRose");
+										if (Bpreset.checked)
+										{
+											rgb="R=255&G=0&B=128&W=0";
+											Hrange.value=89;
+										}
+										else
+										{
+											Bpreset = document.getElementById("RBlanc");
+											if (Bpreset.checked)
+											{
+												rgb="R=255&G=255&B=255&W=255";
+												Trange.value=50;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 		else
 		{
@@ -209,7 +334,7 @@ input[type=range].slider::-webkit-slider-thumb {
   box-shadow: 0.8px 0.8px 1.9px rgba(0, 0, 62, 0.67), 0px 0px 0.8px rgba(0, 0, 88, 0.67);
   border: 0.4vh solid rgba(255, 255, 255,255);
   height:  6vh;
-  width:  2vh;
+  width:  4vh;
   //border-radius:  1vh;
   background: #000000;
   cursor: pointer;
@@ -396,6 +521,67 @@ body{
   width: 6vh;
 }
 
+.buttonC {
+  background: #cfe7fa;
+
+  border: 1px solid #6393c1;
+ 
+  cursor: pointer;
+  display: inline-block;
+  
+  margin: 0vh 2vh 0vh 2vh;
+  width: 10vh;
+  height: 10vh;
+  border-radius: 5vh;
+}
+
+#Rouge { background: #ff0000;}
+#Orange { background: #ff7700;}
+#Jaune { background: #ffff00;}
+#Vert { background: #00ff00;}
+#Cyan { background: #00ffff;}
+#Bleu { background: #0000ff;}
+#Violet { background: #7700ff;}
+#Rose { background: #ff00ff;}
+#Blanc { background: #ffffff;}
+
+
+
+.buttonC:hover .inner {
+  opacity: .5;
+}
+
+.buttonC input {
+  display: none;
+}
+
+.buttonC input:checked + .outer .inner {
+  opacity: 1;
+}
+
+.buttonC .inner {
+  background: #ffffff;
+  display: block;
+  
+  margin: 1vh 1vh;
+  opacity: 0;
+  -moz-transition: opacity .5s;
+  -webkit-transition: opacity .5s;
+  -o-transition: opacity .5s;
+  transition: opacity .5s;
+  height: 4vh;
+  width: 4vh;
+  border-radius: 4vh;
+
+  
+    //border-top: 6vh solid transparent;
+    border-right: 2vh solid black;
+    border-top: 2vh solid black;
+    border-bottom: 2vh solid black;
+    border-left: 2vh solid black;
+
+}
+
 #curseur{
 	//position:absolute;
 	//top:8vh;
@@ -415,7 +601,7 @@ body{
 #Pwhite, #Pcolor {
 	height: 0px;
 	background-size: 6vh 80vw;
-	margin: -3vh;
+	margin: -3vh 10vw;
 }
 
 #right {
@@ -458,16 +644,16 @@ body{
             </div>		
 			<div class="row">
 				<label class="button" id="BCTOUT">
-					<input type="checkbox" name="button" id="CTOUT" />
+					<input type="checkbox" name="button" id="CTOUT"  onchange="loadXML()" />
 					Off Tout
 					<span class="outer"><span class="inner"></span></span>
 				</label><label class="button" id="BC1">
-					<input type="checkbox" name="button" id="C1" />
+					<input type="checkbox" name="button" id="C1"  onchange="loadXML()" />
 					Off 1
 					<span class="outer"><span class="inner"></span></span>
 				</label>
 				<label class="button" id="BC2">
-					<input type="checkbox" name="button" id="C2" />
+					<input type="checkbox" name="button" id="C2"  onchange="loadXML()" />
 					Off 2
 					<span class="outer"><span class="inner"></span></span>
 				</label>
@@ -478,53 +664,51 @@ body{
 			
 				<h4>Intensité</h4>
 				<div id="right">	</div>
-				<input type="range" name="points" id="Pwhite" onmousemove="White()" onchange="loadXML(1)"  value="50" min="0" max="100" class="slider" >
+				<input type="range" name="points" id="Pwhite" onmousemove="White()" onchange="loadXML(1)"  value="55" min="10" max="100" class="slider" >
 				
 				
 				
 			</div>
 			
 			<div class="row">
-				<label class="button" id="Rouge">
-                    <input type="radio" name="button" id="RRouge" />
-                    Rouge
-                    <span class="outer"><span class="inner"></span></span>
+				<label class="buttonC" id="Rouge">
+                    <input type="radio" name="couleur" id="RRouge"  onchange="loadXML(3)"/>
+						<span class="inner" id="IRouge"></span>
                 </label>
-				<label class="button" id="Orange">
-                    <input type="radio" name="button" id="ROrange" />
-                    Orange
-                    <span class="outer"><span class="inner"></span></span>
+				<label class="buttonC" id="Orange">
+                    <input type="radio" name="couleur" id="ROrange"  onchange="loadXML(3)"/>
+						<span class="inner"></span>
                 </label>
-				<label class="button" id="Jaune">
-                    <input type="radio" name="button" id="RJaune" />
-                    Jaune
-                    <span class="outer"><span class="inner"></span></span>
+				<label class="buttonC" id="Jaune">
+                    <input type="radio" name="couleur" id="RJaune"  onchange="loadXML(3)"/>
+                   <span class="inner"></span>
                 </label>
-                <label class="button" id="Vert">
-                    <input type="radio" name="button" id="RVert" />
-                    Vert
-                    <span class="outer"><span class="inner"></span></span>
+                <label class="buttonC" id="Rose">
+                    <input type="radio" name="couleur" id="RRose"  onchange="loadXML(3)"/>
+                   <span class="inner"></span>
                 </label>
-                <label class="button" id="Vert">
-                    <input type="radio" name="button" id="RVert" />
-                    Cyan
-                    <span class="outer"><span class="inner"></span></span>
+				<label class="buttonC" id="Blanc">
+                    <input type="radio" name="couleur" id="RBlanc" onchange="loadXML(3)" />
+                   <span class="inner"></span>
                 </label>
-                <label class="button" id="Bleu">
-                    <input type="radio" name="button" id="RBleu" />
-                    Bleu
-                    <span class="outer"><span class="inner"></span></span>
+				 <label class="buttonC" id="Vert">
+                    <input type="radio" name="couleur" id="RVert"  onchange="loadXML(3)"/>
+                    <span class="inner"></span>
                 </label>
-                <label class="button" id="Bleu">
-                    <input type="radio" name="button" id="RBleu" />
-                    Violet
-                    <span class="outer"><span class="inner"></span></span>
+				<label class="buttonC" id="Violet">
+                    <input type="radio" name="couleur" id="RViolet"  onchange="loadXML(3)"/>
+                   <span class="inner"></span>
                 </label>
-                <label class="button" id="Bleu">
-                    <input type="radio" name="button" id="RBleu" />
-                    Rose
-                    <span class="outer"><span class="inner"></span></span>
+                <label class="buttonC" id="Bleu">
+                    <input type="radio" name="couleur" id="RBleu"  onchange="loadXML(3)"/>
+                   <span class="inner"></span>
                 </label>
+                <label class="buttonC" id="Cyan">
+                    <input type="radio" name="couleur" id="RCyan" onchange="loadXML(3)" />
+                    <span class="inner"></span>
+                </label>
+               
+				
             </div>
 			
 			<div class="row" id="curseur">
